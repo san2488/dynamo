@@ -1,0 +1,14 @@
+﻿body 
+{
+    font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
+}
+
+label 
+{
+    min-width:225px;
+    display: inline-block;
+}
+.validationError 
+{
+    color:Red;
+}

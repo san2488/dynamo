@@ -1,0 +1,53 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Dynamic Control Creation Test</title>
+    <link href="global.css" rel="stylesheet" type="text/css" />
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+    <script type="text/javascript" src="dynamoExParser.js"></script>
+    <script type="text/javascript" src="dynamo.js"></script>
+    <script type="text/javascript">
+        $(function () {
+            var grpControls = [{ type: "text", opts: { id: "TXT_MAIDEN_NAME", text: "Maiden Name", mask: "^[0-9a-zA-Z/-]{7,14}$"} },
+                        { type: "decimal", opts: { id: "DEC_VISIBLE_AGE", text: "Age (Will Be Disclosed)"} },
+                        { type: "date", opts: { id: "DTE_BIRTH_DATE", text: "Birth Date (Will Not Be Disclosed)"}}];
+
+            var controls = [
+                        { type: "label", opts: { id: "LBL_WELCOME", labelFor: "Welcome", labelText: "Welcome to this demo of Dynamo"} },
+                        
+                        { type: "decimal", opts: { id: "DEC_HEIGHT", req: true, text: "Height (in meters)"} },
+
+                        { type: "percentage", opts: { id: "PER_AMT_TO_PAY", req: true, text: "Pay Amount (in percentage)"} },
+
+                        { type: "email", opts: { id: "EML_EMAIL_ADDR", req: true, text: "Email"} },
+
+                        { type: "currency", opts: { id: "CUR_SALARY", req: true, text: "Salary"} },
+
+                        { type: "checkbox", opts: { id: "CBX_Human", req: true, text: "Human"} },
+
+                        { type: "radioMenu", opts: { id: "RDM_GENDER", req: true, text: "Radios", menuItems: [{ id: "MNI_MALE", text: "Male", checked: true }, { id: "MNI_FEMALE", text: "Female"}]} },
+
+                        { type: "menu", opts: { id: "MNU_WORK_PERMIT", req: true, text: "Work Permit", menuItems: [{ value: "MNI_F1", text: "Student Visa (F1)" }, { value: "MNI_CITIZEN", text: "Citizen/Green Card"}]} },
+
+                        { type: "group", opts: { id: "GRP_ALIEN_DETAILS", controls: grpControls, displayExp: '((RDM_GENDER == "MNI_FEMALE")&&(MNU_WORK_PERMIT == "MNI_F1"))'} }
+                       ];
+
+            var page = getControl('page', { controls: controls, submitLabel: 'Submit' });
+            
+            $('#mainContent').append(page);
+            initializeDisplayExpressions();
+
+            //            $("#myform").submit(validate);
+            //            alert(eval(controlsTreeExp));
+
+        });
+    </script>
+</head>
+<body>
+    <h2>
+        Demo of Dynamo</h2>
+    <div id="mainContent">
+    </div>
+    <h5>Documentation is provided in the JS file right now</h5>
+</body>
+</html>
